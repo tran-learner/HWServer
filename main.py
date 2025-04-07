@@ -6,7 +6,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Only accept request from this address
+    allow_origins=[
+        "http://localhost:3000",
+        "https://baristaweb.onrender.com/drinks"
+    ],  # Only accept request from this address
     allow_credentials=True,
     allow_methods=["*"],  # accept all methods
     allow_headers=["*"],  # accept all headers
