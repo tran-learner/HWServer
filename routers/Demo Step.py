@@ -1,31 +1,43 @@
 import RPi.GPIO as gpio
-from time import sleep
+import time
+import threading
 
 step_enpin = [23,25,7,12]
 step_dirpin = [24,8,1,16]
 
 gpio.setmode(gpio.BCM)
-for a in range(len(step_enpin)-1):
+for a in range(len(step_enpin)):
     gpio.setup(step_enpin[a], gpio.OUT)
     gpio.setup(step_dirpin[a], gpio.OUT)
     gpio.output(step_dirpin[a],0)
 
-def run_step(pin,dir,time):
-    gpio.output(step_dirpin[pin],dir)
-    gpio.output(step_enpin[pin],gpio.HIGH)
-    sleep(time)
-    gpio.output(step_enpin[pin],gpio.LOW)
+def run_step(pin,dir,times):
+    try:
+        while True:
+            gpio.output(step_dirpin[pin],dir)
+            gpio.output(step_enpin[pin],gpio.HIGH)
+            time.sleep(times)
+            gpio.output(step_enpin[pin],gpio.LOW)
+    except KeyboardInterrupt:
+        print("Dmm dang chay, bam bam cai quan que ne he")
+    finally:
+        GPIO.cleanup(pin) # Clean up individual pin on thread exit
 
-try:
-    while True:
-        run_step(0,1,1)
-        sleep(1)
-        run_step(1,1,1)
-        sleep(1)
-        run_step(2,1,1)
-        sleep(1)
-        run_step(3,1,1)
-        sleep(1)
-     
-except KeyboardInterrupt:
-    gpio.cleanup()
+if __name__ == "__main__":
+    try:
+        # Create and start threads for each pin
+        thread1 = threading.Thread(target=run_step, args=(0,1,1))
+        thread2 = threading.Thread(target=run_step, args=(1,1,2))
+        thread3 = threading.Thread(target=run_step, args=(2,1,3))
+        thread4 = threading.Thread(target=run_step, args=(3,1,4))
+
+        thread1.start()
+        thread2.start()
+        thread3.start()
+        thread4.start()
+
+        while True:
+            time.sleep(1)
+        
+    except KeyboardInterrupt:
+        gpio.cleanup()
