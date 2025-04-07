@@ -2,10 +2,10 @@ import RPi.GPIO as GPIO
 import time
 
 # Define the GPIO pins you want to use
-pin1 = 17
-pin2 = 18
-pin3 = 27
-pin4 = 22
+pin1 = 23
+pin2 = 25
+pin3 = 7
+pin4 = 12
 
 # Set the GPIO mode to BCM numbering
 GPIO.setmode(GPIO.BCM)
