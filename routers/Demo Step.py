@@ -18,9 +18,14 @@ def run_step(pin,dir,time):
 
 try:
     while True:
+        run_step(0,1,1)
+        sleep(1)
         run_step(1,1,1)
         sleep(1)
-
+        run_step(2,1,1)
+        sleep(1)
+        run_step(3,1,1)
+        sleep(1)
      
 except KeyboardInterrupt:
     gpio.cleanup()
