@@ -1,7 +1,19 @@
 import RPi.GPIO as gpio
 import time
 import threading
+rom fastapi import APIRouter
+from pydantic import BaseModel
+barista_web_router = APIRouter()
 
+class PumpData(BaseModel):
+    sugar: int
+    coffee: int
+
+@barista_web_router.post('/pumphandle')
+async def pump_handle(data: PumpData):
+    print("Recieved:")
+    print(f"Sugar: {data.sugar}")
+    print(f"Coffee: {data.coffee}")
 step_enpin = [23,25,7,12]
 step_dirpin = [24,8,1,16]
 
