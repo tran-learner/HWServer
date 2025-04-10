@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 import threading
-rom fastapi import APIRouter
+from fastapi import APIRouter
 from pydantic import BaseModel
 barista_web_router = APIRouter()
 
