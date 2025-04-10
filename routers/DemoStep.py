@@ -1,5 +1,8 @@
+import RPi.GPIO as gpio
 from time import sleep
-
+from fastapi import APIRouter
+from pydantic import BaseModel
+barista_web_router = APIRouter()
 
 direction_pin   = 20
 pulse_pin       = 21
@@ -10,6 +13,16 @@ gpio.setmode(gpio.BCM)
 gpio.setup(direction_pin, gpio.OUT)
 gpio.setup(pulse_pin, gpio.OUT)
 gpio.output(direction_pin,cw_direction)
+
+class PumpData(BaseModel):
+    sugar: int
+    coffee: int
+
+@barista_web_router.post('/pumphandle')
+async def pump_handle(data: PumpData):
+    print("Recieved:")
+    print(f"Sugar: {data.sugar}")
+    print(f"Coffee: {data.coffee}")
 
 try:
     while True:
