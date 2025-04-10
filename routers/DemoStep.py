@@ -30,10 +30,11 @@ def run_step(pin,dir,times):
             gpio.output(step_enpin[pin],gpio.HIGH)
             time.sleep(times)
             gpio.output(step_enpin[pin],gpio.LOW)
+            time.sleep(times)
     except KeyboardInterrupt:
         print("Dmm dang chay, bam bam cai quan que ne he")
     finally:
-        GPIO.cleanup(pin) # Clean up individual pin on thread exit
+        gpio.cleanup(pin) # Clean up individual pin on thread exit
 
 if __name__ == "__main__":
     try:
