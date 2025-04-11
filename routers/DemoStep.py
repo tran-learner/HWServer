@@ -23,14 +23,15 @@ for a in range(len(step_enpin)):
     gpio.setup(step_dirpin[a], gpio.OUT)
     gpio.output(step_dirpin[a],0)
 
-def run_step(pin,dir,times):
+def run_step(pin,dir,steps):
     try:
         while True:
-            gpio.output(step_dirpin[pin],dir)
-            gpio.output(step_enpin[pin],gpio.HIGH)
-            time.sleep(times*98/100)
-            gpio.output(step_enpin[pin],gpio.LOW)
-            time.sleep(times*2/100)
+            for step in range(steps):
+                gpio.output(step_dirpin[pin],dir)
+                gpio.output(step_enpin[pin],gpio.HIGH)
+                time.sleep(times*98/100)
+                gpio.output(step_enpin[pin],gpio.LOW)
+                time.sleep(times*2/100)
     except KeyboardInterrupt:
         print("Dmm dang chay, bam bam cai quan que ne he")
     finally:
