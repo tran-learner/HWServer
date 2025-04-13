@@ -40,8 +40,8 @@ def run_step(pin,dir,steps,dutycycle):
 if __name__ == "__main__":
     try:
         # Create and start threads for each pin
-        thread1 = threading.Thread(target=run_step, args=(0,1,0.0000005))
-        thread2 = threading.Thread(target=run_step, args=(1,1,2))
+        thread1 = threading.Thread(target=run_step, args=(0,1,data.coffee*10))
+        thread2 = threading.Thread(target=run_step, args=(1,1,data.sugar*10))
         thread3 = threading.Thread(target=run_step, args=(2,1,3))
         thread4 = threading.Thread(target=run_step, args=(3,1,4))
 
