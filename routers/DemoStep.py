@@ -8,14 +8,14 @@ step_dirpin = [24, 8, 1, 16]
 
 
 
-def run_step(pin, dir, steps, dutycycle=100):
+def run_step(pin, dir, steps, dutycycle=95):
     try:
         for step in range(steps):
             GPIO.output(step_dirpin[pin], dir)
             GPIO.output(step_enpin[pin], GPIO.HIGH)
-            time.sleep(0.001 * dutycycle / 100)
+            time.sleep(0.0001 * dutycycle / 100)
             GPIO.output(step_enpin[pin], GPIO.LOW)
-            time.sleep(0.001 * (100 - dutycycle) / 100)
+            time.sleep(0.0001 * (100 - dutycycle) / 100)
     finally:
         GPIO.output(step_enpin[pin], GPIO.LOW)
 
