@@ -37,21 +37,21 @@ def run_step(pin,dir,steps,dutycycle):
     finally:
         gpio.cleanup(pin) # Clean up individual pin on thread exit
 
-if __name__ == "__main__":
-    try:
-        # Create and start threads for each pin
-        thread1 = threading.Thread(target=run_step, args=(0,1,data.coffee*10))
-        thread2 = threading.Thread(target=run_step, args=(1,1,data.sugar*10))
-        thread3 = threading.Thread(target=run_step, args=(2,1,3))
-        thread4 = threading.Thread(target=run_step, args=(3,1,4))
 
-        thread1.start()
-        thread2.start()
-        thread3.start()
-        thread4.start()
+try:
+    # Create and start threads for each pin
+    thread1 = threading.Thread(target=run_step, args=(0,1,data.coffee*10))
+    thread2 = threading.Thread(target=run_step, args=(1,1,data.sugar*10))
+    thread3 = threading.Thread(target=run_step, args=(2,1,3))
+    thread4 = threading.Thread(target=run_step, args=(3,1,4))
 
-        while True:
-            time.sleep(1)
-        
-    except KeyboardInterrupt:
-        gpio.cleanup()
+    thread1.start()
+    thread2.start()
+    thread3.start()
+    thread4.start()
+
+    while True:
+        time.sleep(1)
+    
+except KeyboardInterrupt:
+    gpio.cleanup()
