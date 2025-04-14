@@ -1,4 +1,4 @@
-import RPi.GPIO as gpio
+import RPi.GPIO as GPIO
 import time
 import threading
 
@@ -6,22 +6,22 @@ import threading
 step_enpin = [23, 25, 7, 12]
 step_dirpin = [24, 8, 1, 16]
 
-gpio.setmode(gpio.BCM)
+GPIO.setmode(GPIO.BCM)
 for a in range(len(step_enpin)):
-    gpio.setup(step_enpin[a], gpio.OUT)
-    gpio.setup(step_dirpin[a], gpio.OUT)
-    gpio.output(step_dirpin[a], 0)
+    GPIO.setup(step_enpin[a], GPIO.OUT)
+    GPIO.setup(step_dirpin[a], GPIO.OUT)
+    GPIO.output(step_dirpin[a], 0)
 
 def run_step(pin, dir, steps, dutycycle=50):
     try:
         for step in range(steps):
-            gpio.output(step_dirpin[pin], dir)
-            gpio.output(step_enpin[pin], gpio.HIGH)
+            GPIO.output(step_dirpin[pin], dir)
+            GPIO.output(step_enpin[pin], GPIO.HIGH)
             time.sleep(0.001 * dutycycle / 100)
-            gpio.output(step_enpin[pin], gpio.LOW)
+            GPIO.output(step_enpin[pin], GPIO.LOW)
             time.sleep(0.001 * (100 - dutycycle) / 100)
     finally:
-        gpio.output(step_enpin[pin], gpio.LOW)
+        GPIO.output(step_enpin[pin], GPIO.LOW)
 
 def run_pumps(coffee: int, sugar: int):
     # Tạo và chạy các thread để điều khiển bơm
@@ -42,4 +42,4 @@ def run_pumps(coffee: int, sugar: int):
     thread4.join()
 
     # Clean up sau khi chạy xong
-    gpio.cleanup()
+    GPIO.cleanup()
