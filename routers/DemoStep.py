@@ -8,7 +8,7 @@ step_dirpin = [24, 8, 1, 16]
 
 
 
-def run_step(pin, dir, steps, dutycycle=100):
+def run_step(pin, dir, steps, dutycycle=75):
     try:
         for step in range(steps):
             GPIO.output(step_dirpin[pin], dir)
