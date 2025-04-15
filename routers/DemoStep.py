@@ -19,7 +19,7 @@ def run_step(pin, dir, steps, dutycycle=95):
     finally:
         GPIO.output(step_enpin[pin], GPIO.LOW)
 
-def run_pumps(coffee: int, sugar: int):
+def run_pumps(coffee: float, milk: float, tea: float, sugar: float):
     GPIO.setmode(GPIO.BCM)
     for a in range(len(step_enpin)):
         GPIO.setup(step_enpin[a], GPIO.OUT)
@@ -27,9 +27,9 @@ def run_pumps(coffee: int, sugar: int):
         GPIO.output(step_dirpin[a], 0)
     # Tạo và chạy các thread để điều khiển bơm
     thread1 = threading.Thread(target=run_step, args=(0, 1, coffee * 10))
-    thread2 = threading.Thread(target=run_step, args=(1, 1, sugar * 10))
-    thread3 = threading.Thread(target=run_step, args=(2, 1, 30))
-    thread4 = threading.Thread(target=run_step, args=(3, 1, 40))
+    thread2 = threading.Thread(target=run_step, args=(1, 1, milk * 10))
+    thread3 = threading.Thread(target=run_step, args=(2, 1, tea * 10))
+    thread4 = threading.Thread(target=run_step, args=(3, 1, sugar * 10))
 
     thread1.start()
     thread2.start()

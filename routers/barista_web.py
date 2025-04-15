@@ -19,15 +19,20 @@ from routers.DemoStep import run_pumps
 barista_web_router = APIRouter()
 
 class PumpData(BaseModel):
-    sugar: int
-    coffee: int
+    sugar: float
+    coffee: float
+    milk: float
+    tea: float
 
 @barista_web_router.post('/pumphandle')
 async def pump_handle(data: PumpData):
     print("Received:")
     print(f"Sugar: {data.sugar}")
     print(f"Coffee: {data.coffee}")
+    print(f"Sugar: {data.milk}")
+    print(f"Coffee: {data.sugar}")
+
     
-    run_pumps(data.coffee, data.sugar)
+    run_pumps(data.coffee, data.milk, data.tea, data.sugar)
 
     return {"status": "success"}
