@@ -19,10 +19,10 @@ from routers.DemoStep import run_pumps
 barista_web_router = APIRouter()
 
 class PumpData(BaseModel):
-    sugar: float
-    coffee: float
-    milk: float
-    tea: float
+    sugar: int
+    coffee: int
+    milk: int
+    tea: int
 
 @barista_web_router.post('/pumphandle')
 async def pump_handle(data: PumpData):

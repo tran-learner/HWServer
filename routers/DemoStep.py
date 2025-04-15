@@ -19,7 +19,7 @@ def run_step(pin, dir, steps, dutycycle=95):
     finally:
         GPIO.output(step_enpin[pin], GPIO.LOW)
 
-def run_pumps(coffee: float, milk: float, tea: float, sugar: float):
+def run_pumps(coffee: int, milk: int, tea: int, sugar: int):
     GPIO.setmode(GPIO.BCM)
     for a in range(len(step_enpin)):
         GPIO.setup(step_enpin[a], GPIO.OUT)
