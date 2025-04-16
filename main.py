@@ -8,6 +8,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
+        "http://localhost:8000",
         "https://baristaweb.onrender.com/drinks"
     ],  # Only accept request from this address
     allow_credentials=True,
@@ -15,7 +16,6 @@ app.add_middleware(
     allow_headers=["*"],  # accept all headers
 )
 
-allow_origins=["http://localhost:3000"]
 @app.get("/")
 async def welcome():
     return "Server is running at"
