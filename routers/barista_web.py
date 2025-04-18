@@ -27,7 +27,7 @@ class PumpData(BaseModel):
 @barista_web_router.post('/pumphandle')
 async def pump_handle(data: PumpData):
     print("Received:")
-    print(f"Sugar: {data.sugar}")
+    print(f"Sugar: {data.tea}")
     print(f"Coffee: {data.coffee}")
     print(f"Sugar: {data.milk}")
     print(f"Coffee: {data.sugar}")
