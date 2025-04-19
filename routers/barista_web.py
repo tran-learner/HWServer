@@ -15,6 +15,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from routers.DemoStep import run_pumps
+from routers.sate import delayed_shutdown
 
 barista_web_router = APIRouter()
 
@@ -27,12 +28,9 @@ class PumpData(BaseModel):
 @barista_web_router.post('/pumphandle')
 async def pump_handle(data: PumpData):
     print("Received:")
-    print(f"Sugar: {data.Sugar}")
-    print(f"Coffee: {data.Coffee}")
-    print(f"Milk: {data.Milk}")
-    print(f"Tea: {data.Tea}")
-
+    print(f"Data: {data}")
     
     run_pumps(data.Coffee, data.Milk, data.Tea, data.Sugar)
-
+    delayed_shutdown(data.State)
+    
     return {"status": "success"}
