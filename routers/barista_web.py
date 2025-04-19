@@ -31,7 +31,7 @@ async def pump_handle(data: PumpData):
     print("Received:")
     print(f"Data: {data}")
     
-    run_pumps(data.Coffee, data.Milk, data.Tea, data.Sugar)
+    if(data.State == 0): run_pumps(data.Coffee, data.Milk, data.Tea, data.Sugar)
     delayed_shutdown(data.State)
     
     return {"status": "success"}
