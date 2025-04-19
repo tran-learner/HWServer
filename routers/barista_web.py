@@ -24,6 +24,7 @@ class PumpData(BaseModel):
     Coffee: int
     Milk: int
     Tea: int
+    State: int
 
 @barista_web_router.post('/pumphandle')
 async def pump_handle(data: PumpData):
