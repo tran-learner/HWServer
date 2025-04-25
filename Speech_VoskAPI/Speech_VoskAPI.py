@@ -3,13 +3,17 @@ import queue
 import json
 from vosk import Model, KaldiRecognizer
 
-# ======================================= Confiuration ===============================================
+# Confiuration Library
 model_path = "vosk-model-small-en-us-0.15"  
+# ======================================== Keywords Drinking Water ====================================
 keywords_milk_coffee = ["milk coffee","hot milk coffee","cappuccino","macchiato","coffee with milk"]
 keywords_coffee = ["coffee","cafe", "iced coffee", "espresso", "double espresso"]
 keywords_milk_tea = ["milk tea", "classic milk tea", "brown sugar milk tea","tea with milk"]
+# ======================================= Keywords Size =================================================
+keywords_Size_S = ["size S"]
+keywords_Size_M = ["size M"]
+keywords_Size_L = ["size L"]
 
-# ======================================= Initialize =================================================
 q = queue.Queue()
 
 device_info = sd.query_devices(sd.default.device[0], 'input')
@@ -44,9 +48,20 @@ with sd.RawInputStream(samplerate=samplerate, blocksize=8000, dtype='int16',
 
                 if contains_keywords(text, keywords_milk_coffee):
                     print("Keyword Detect: milk coffee")
+
                 elif contains_keywords(text, keywords_coffee):
                     print("Keyword Detect: coffee")
+
                 elif contains_keywords(text, keywords_milk_tea):
+                    print("Keyword Detect: milk tea")
+
+                elif contains_keywords(text, keywords_Size_S):
+                    print("Keyword Detect: milk tea")
+                    
+                elif contains_keywords(text, keywords_Size_M):
+                    print("Keyword Detect: milk tea")
+
+                elif contains_keywords(text, keywords_Size_L):
                     print("Keyword Detect: milk tea")
                 else:
                     print("Not Keyword Detect")
